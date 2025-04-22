@@ -1,0 +1,47 @@
+#version: '3.8'
+#
+#services:
+#  zookeeper:
+#    image: bitnami/zookeeper:latest
+#    ports:
+#      - "2181:2181"
+#    environment:
+#      - ALLOW_ANONYMOUS_LOGIN=yes
+#
+#  kafka:
+#    image: bitnami/kafka:latest
+#    ports:
+#      - "9092:9092"
+#    environment:
+#      - KAFKA_BROKER_ID=1
+#      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+#      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+#      - ALLOW_PLAINTEXT_LISTENER=yes
+#    depends_on:
+#      - zookeeper
+#
+#  postgres:
+#    image: postgres:15
+#    container_name: producer_postgres
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_DB: camel_db
+#      POSTGRES_USER: camel_user
+#      POSTGRES_PASSWORD: camel_pass
+#
+#  producer-service:
+#    image: producer-service:latest
+#    container_name: producer-service
+#    build:
+#      context: ./producer
+#    depends_on:
+#      - kafka
+#      - postgres
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/camel_db
+#      SPRING_DATASOURCE_USERNAME: camel_user
+#      SPRING_DATASOURCE_PASSWORD: camel_pass
+#      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
