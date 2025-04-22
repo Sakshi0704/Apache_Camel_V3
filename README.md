@@ -1,5 +1,3 @@
-﻿# Apache_Camel_V3
-
 # Kafka and Apache Camel Integration with Docker Compose
 
 This project demonstrates the integration of Apache Camel with Kafka and PostgreSQL using Docker Compose. It includes two Spring Boot microservices:
